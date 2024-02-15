@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Project;
+use App\Models\Technology;
 use Illuminate\Http\Request;
 
 class ProjectController extends Controller
@@ -24,7 +25,9 @@ class ProjectController extends Controller
     {
         $pageTitle = 'Create new post';
         $project = new Project();
-        return view('admin.projects.create',compact('project','pageTitle'));
+
+        $technologies=Technology::all();
+        return view('admin.projects.create',compact('project','pageTitle','technologies'));
     }
 
     /**
@@ -60,7 +63,7 @@ class ProjectController extends Controller
     public function edit(Project $project)
     {
 
-
+       $technologies=Technology::all();
        return view('admin.projects.edit', compact('project'));
     }
 

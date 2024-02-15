@@ -41,6 +41,17 @@
                     </div>
 
                     <div class="mb-3 input-group">
+                        <div>
+                            @foreach ($technologies as $technology)
+                                <input class="form-check-input" type="checkbox" name="technologies" id="technologies"
+                                    value="{{$technology->id}}">
+                                <label for="technologies">{{$technology->name}}</label>
+                            @endforeach
+
+                        </div>
+                    </div>
+
+                    <div class="mb-3 input-group">
                         <label for="date" class="input-group-text"> Date:</label>
                         <input class="form-control" type="text" name="date" id="date"
                             value="{{ old('date', $project->date) }}">
@@ -76,15 +87,11 @@
 
     </div>
 
-<script>
- document.getElementById('image').addEventListener('change', function(event){
-        const imageElement = document.getElementById('image-preview');
-        imageElement.setAttribute('src' , this.value);
-        imageElement.classList.remove('d-none');
-    });
-
-
-</script>
-
-
+    <script>
+        document.getElementById('image').addEventListener('change', function(event) {
+            const imageElement = document.getElementById('image-preview');
+            imageElement.setAttribute('src', this.value);
+            imageElement.classList.remove('d-none');
+        });
+    </script>
 @endsection
