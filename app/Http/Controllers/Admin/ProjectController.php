@@ -37,7 +37,7 @@ class ProjectController extends Controller
     {
         $data = $request->validate([
             'title' => ['required', 'min:1','max:255' ,'string'],
-            'author' => ['required', 'min:1','max:40' ,'string'],
+
             'image' => ['url:https','required'],
             'date' => ['date','required'],
             'description' => ['required', 'min:10','string'],
@@ -64,7 +64,7 @@ class ProjectController extends Controller
     {
 
        $technologies=Technology::all();
-       return view('admin.projects.edit', compact('project'));
+       return view('admin.projects.edit', compact('project', 'technologies'));
     }
 
     /**
