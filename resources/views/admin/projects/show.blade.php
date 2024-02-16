@@ -17,10 +17,11 @@
                         {{ $project->title }}
                 </p>
 
-                
+
 
 
                 <p>{{ $project->user->name }}</p>
+                <p>{{$project->type->name}}</p>
                 <p>{{ $project->description }}</p>
                 <p>{{ $project->date }}</p>
 

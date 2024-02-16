@@ -45,10 +45,14 @@ class ProjectController extends Controller
             'image' => ['url:https','required'],
             'date' => ['date','required'],
             'description' => ['required', 'min:10','string'],
+            'technologies' =>['exists:technologies, id'],
         ]);
 
         $data['user_id'] = Auth::id();
+
         $project = Project::create($data);
+
+        $project->technologies()->sync($data['technologies']);
 
         return redirect()->route('admin.projects.show', $project);
     }
@@ -79,13 +83,13 @@ class ProjectController extends Controller
 
         $data = $request->validate([
             'title' => ['required', 'min:1','max:255' ,'string'],
-           
+
             'image' => ['url:https','required'],
             'date' => ['date','required'],
             'description' => ['required', 'min:10','string'],
         ]);
 
-
+        $data['user_id'] = Auth::id();
         $project->update($data);
 
         return redirect()->route('admin.projects.show', $project);
