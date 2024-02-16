@@ -42,10 +42,11 @@ class ProjectController extends Controller
         $data = $request->validate([
             'title' => ['required', 'min:1','max:255' ,'string'],
             'type_id' => ['exists:types,id'],
+            'technologies' =>['exists:technologies, id'],
             'image' => ['url:https','required'],
             'date' => ['date','required'],
             'description' => ['required', 'min:10','string'],
-            'technologies' =>['exists:technologies, id'],
+
         ]);
 
         $data['user_id'] = Auth::id();
@@ -83,7 +84,8 @@ class ProjectController extends Controller
 
         $data = $request->validate([
             'title' => ['required', 'min:1','max:255' ,'string'],
-
+            'type_id' => ['exists:types,id'],
+            'technologies' =>['exists:technologies, id'],
             'image' => ['url:https','required'],
             'date' => ['date','required'],
             'description' => ['required', 'min:10','string'],
