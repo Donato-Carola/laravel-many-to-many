@@ -18,6 +18,7 @@
                             <th scope="col">ID</th>
                             <th scope="col">Title</th>
                             <th scope="col">Author</th>
+                            <!--<th scope="col">Tecnology</th>-->
                             <th scope="col">Type</th>
                             <th scope="col">Description</th>
                             <th scope="col">Date</th>
@@ -36,6 +37,7 @@
                                 </a>
 
                                 <td>{{ $project->user_id }}</td>
+
                                 <td>{{ $project->type->name }}</td>
 
                                 <td>{{ substr($project->description, 0, 50) }}...</td>

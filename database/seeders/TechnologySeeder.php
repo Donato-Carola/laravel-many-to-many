@@ -32,7 +32,7 @@ class TechnologySeeder extends Seeder
 
 
         $newTechnology=new Technology();
-        $newTechnology->name =  $name;
+        $newTechnology->name = $name;
 
         $newTechnology->color=$faker->safeHexColor();
         $newTechnology->save();

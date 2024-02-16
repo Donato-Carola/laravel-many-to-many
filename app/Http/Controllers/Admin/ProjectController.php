@@ -39,10 +39,12 @@ class ProjectController extends Controller
      */
     public function store(Request $request)
     {
+//dd($request->all());
+
         $data = $request->validate([
             'title' => ['required', 'min:1','max:255' ,'string'],
             'type_id' => ['exists:types,id'],
-            'technologies' =>['exists:technologies, id'],
+            'technologies' =>['exists:technologies,id'],
             'image' => ['url:https','required'],
             'date' => ['date','required'],
             'description' => ['required', 'min:10','string'],
@@ -53,7 +55,7 @@ class ProjectController extends Controller
 
         $project = Project::create($data);
 
-
+        $project->technologies()->sync($data['technologies']);
 
         return redirect()->route('admin.projects.show', $project);
     }
@@ -73,6 +75,7 @@ class ProjectController extends Controller
     {
        $types= Type::all();
        $technologies=Technology::all();
+
        return view('admin.projects.edit', compact('project','types','technologies'));
     }
 
@@ -85,7 +88,7 @@ class ProjectController extends Controller
         $data = $request->validate([
             'title' => ['required', 'min:1','string' ,'max:255'],
             'type_id' => ['exists:types,id'],
-            'technologies' =>['exists:technologies, id'],
+            'technologies' =>['exists:technologies,id'],
             'image' => ['url:https','required'],
             'date' => ['date','required'],
             'description' => ['required', 'min:10','string'],
@@ -93,7 +96,7 @@ class ProjectController extends Controller
 
         $data['user_id'] = Auth::id();
         $project->update($data);
-
+        $project->technologies()->sync($data['technologies']);
         return redirect()->route('admin.projects.show', $project);
 
 
