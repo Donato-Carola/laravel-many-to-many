@@ -48,9 +48,10 @@
                     <div class="mb-3 input-group">
                         <div>
                             @foreach ($technologies as $technology)
-                                <input class="form-check-input" type="checkbox" name="technologies[]" id="technologies"
-                                    value="{{ $technology->id }}">
-                                <label for="technologies">{{ $technology->name }}</label>
+                                <input class="form-check-input" type="checkbox" name="technologies[]" id="technologies-{{$technology->id}}"
+                                    value="{{ $technology->id }}"
+                                    {{ in_array( $technology->id, old('technologies', $project->technologies->pluck('id')->toArray())) ? 'checked' : '' }}>
+                                <label for="technologies-{{ $technology->id }}">{{ $technology->name }}</label>
                             @endforeach
 
                         </div>

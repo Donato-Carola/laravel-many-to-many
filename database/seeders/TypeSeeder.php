@@ -15,7 +15,7 @@ class TypeSeeder extends Seeder
     {
 
       $types=[
-         'fornt-end',
+         'front-end',
          'back-end',
          'full-stack'
       ];

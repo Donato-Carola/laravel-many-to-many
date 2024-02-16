@@ -15,9 +15,24 @@ class TechnologySeeder extends Seeder
      */
     public function run(Faker $faker): void
     {
-        for ($i=0; $i < 20 ; $i++) {
+
+        $names = [
+            'htmt',
+            'css',
+            'vue',
+            'js',
+            'vite',
+            'php',
+            'laravel'
+        ];
+
+       foreach ($names as $name) {
+        # code...
+
+
+
         $newTechnology=new Technology();
-        $newTechnology->name =  $faker->unique()-> text(9);
+        $newTechnology->name =  $name;
 
         $newTechnology->color=$faker->safeHexColor();
         $newTechnology->save();

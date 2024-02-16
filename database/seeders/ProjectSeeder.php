@@ -90,6 +90,7 @@ class ProjectSeeder extends Seeder
 
 
      $typeIds=Type::all()->pluck('id');
+     
 
         foreach ($projects as $project) {
             $newProject = new Project();
