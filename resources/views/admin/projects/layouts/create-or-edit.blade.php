@@ -12,7 +12,7 @@
             <div class="col-12">
 
                 @include('partials.errors')
-  {{-- @dump($technologies)--}}
+                {{-- @dump($technologies) --}}
 
                 <form action="@yield('form-action')" method="POST">
                     @csrf
@@ -27,6 +27,14 @@
                     </div>
 
 
+                    <div class="mb-3 input-group">
+                        <label for="type_id" class="input-group-text">Type</label>
+                        <select class="form-select" type="text" name="type_id" id="type_id">
+                            @foreach ($types as $type)
+                                <option value="{{ $type->id }}">{{ $type->name }} </option>
+                            @endforeach
+                        </select>
+                    </div>
 
                     <div class="mb-3 input-group">
                         <label for="image" class="input-group-text">image_url:</label>
@@ -41,8 +49,8 @@
                         <div>
                             @foreach ($technologies as $technology)
                                 <input class="form-check-input" type="checkbox" name="technologies[]" id="technologies"
-                                    value="{{$technology->id}}">
-                                <label for="technologies">{{$technology->name}}</label>
+                                    value="{{ $technology->id }}">
+                                <label for="technologies">{{ $technology->name }}</label>
                             @endforeach
 
                         </div>

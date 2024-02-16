@@ -17,6 +17,8 @@
                         {{ $project->title }}
                 </p>
 
+                
+
 
                 <p>{{ $project->user->name }}</p>
                 <p>{{ $project->description }}</p>

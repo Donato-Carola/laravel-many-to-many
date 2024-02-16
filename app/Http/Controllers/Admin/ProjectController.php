@@ -5,7 +5,9 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Project;
 use App\Models\Technology;
+use App\Models\Type;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ProjectController extends Controller
 {
@@ -26,8 +28,10 @@ class ProjectController extends Controller
         $pageTitle = 'Create new post';
         $project = new Project();
 
+        $types=Type::all();
+
         $technologies=Technology::all();
-        return view('admin.projects.create',compact('project','pageTitle','technologies'));
+        return view('admin.projects.create',compact('project','pageTitle','types' ,'technologies'));
     }
 
     /**
@@ -37,13 +41,13 @@ class ProjectController extends Controller
     {
         $data = $request->validate([
             'title' => ['required', 'min:1','max:255' ,'string'],
-
+            'type_id' => ['exists:types,id'],
             'image' => ['url:https','required'],
             'date' => ['date','required'],
             'description' => ['required', 'min:10','string'],
         ]);
 
-
+        $data['user_id'] = Auth::id();
         $project = Project::create($data);
 
         return redirect()->route('admin.projects.show', $project);
@@ -62,9 +66,9 @@ class ProjectController extends Controller
      */
     public function edit(Project $project)
     {
-
+       $types= Type::all();
        $technologies=Technology::all();
-       return view('admin.projects.edit', compact('project', 'technologies'));
+       return view('admin.projects.edit', compact('project','types','technologies'));
     }
 
     /**
@@ -75,7 +79,7 @@ class ProjectController extends Controller
 
         $data = $request->validate([
             'title' => ['required', 'min:1','max:255' ,'string'],
-            'author' => ['required', 'min:1','max:40' ,'string'],
+           
             'image' => ['url:https','required'],
             'date' => ['date','required'],
             'description' => ['required', 'min:10','string'],
