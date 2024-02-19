@@ -63,7 +63,7 @@ class ProjectController extends Controller
 
         $project->technologies()->sync($data['technologies']);
 
-        return redirect()->route('admin.projects.show', $project);
+        return redirect()->route('admin.projects.show', $project)->with('message',$project->title . ' has been create succesfully!')->with('alert-class','success');;;
     }
 
     /**
@@ -110,7 +110,7 @@ class ProjectController extends Controller
 
         $project->update($data);
         $project->technologies()->sync($data['technologies']);
-        return redirect()->route('admin.projects.show', $project);
+        return redirect()->route('admin.projects.show', $project)->with('message',$project->title . ' has been update succesfully!')->with('alert-class','success');
 
 
     }
@@ -121,7 +121,8 @@ class ProjectController extends Controller
     public function destroy(Project $project)
     {
         $project->delete();
-        return redirect()->route('admin.projects.index');
+        return redirect()->route('admin.projects.index')->with('message',$project->title . ' has been deleted succesfully!')->with('alert-class','danger');
+
     }
 
 

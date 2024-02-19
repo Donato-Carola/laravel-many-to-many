@@ -11,6 +11,10 @@
                 </h2>
             </div>
 
+
+           @include('partials.session-message')
+
+
             <div class="col-12">
                 <table class="table table-striped table-hover">
                     <thead>
@@ -83,7 +87,8 @@
                                                         data-bs-dismiss="modal">Close</button>
 
                                                     <form class="d-inline-block"
-                                                        action="{{ route('admin.projects.destroy', $project) }}" method="POST">
+                                                        action="{{ route('admin.projects.destroy', $project) }}"
+                                                        method="POST">
                                                         @csrf
                                                         @method('DELETE')
 

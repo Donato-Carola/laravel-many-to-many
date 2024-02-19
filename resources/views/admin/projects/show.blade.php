@@ -17,6 +17,8 @@
                         {{ $project->title }}
                 </p>
 
+                @include('partials.session-message')
+                
                 <ul>
                     @forelse ($project->technologies as $technology)
                         <li class="d-inline me-3">
