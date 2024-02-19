@@ -14,7 +14,7 @@
                 @include('partials.errors')
                 {{-- @dump($technologies) --}}
 
-                <form action="@yield('form-action')" method="POST">
+                <form action="@yield('form-action')" method="POST" enctype="multipart/form-data">
                     @csrf
 
                     @yield('form-method')
@@ -37,8 +37,8 @@
                     </div>
 
                     <div class="mb-3 input-group">
-                        <label for="image" class="input-group-text">image_url:</label>
-                        <input class="form-control" type="text" name="image" id="image"
+                        <label for="image" class="input-group-text">Upload a project image</label>
+                        <input class="form-control" type="file" name="image" id="image"
                             value="{{ old('image', $project->image) }}">
                         <div>
                             <img src="" alt="image preview" class="d-none img-fluid " id="image-preview">

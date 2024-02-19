@@ -8,6 +8,7 @@ use App\Models\Technology;
 use App\Models\Type;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 class ProjectController extends Controller
 {
@@ -45,13 +46,18 @@ class ProjectController extends Controller
             'title' => ['required', 'min:1','max:255' ,'string'],
             'type_id' => ['exists:types,id'],
             'technologies' =>['exists:technologies,id'],
-            'image' => ['url:https','required'],
+            'image' => ['image','required'],
             'date' => ['date','required'],
             'description' => ['required', 'min:10','string'],
 
         ]);
 
         $data['user_id'] = Auth::id();
+
+        $imageSrc= Storage::put('uploads/projects', $data['image']);
+
+        $data['image'] = $imageSrc;
+
 
         $project = Project::create($data);
 
@@ -89,12 +95,19 @@ class ProjectController extends Controller
             'title' => ['required', 'min:1','string' ,'max:255'],
             'type_id' => ['exists:types,id'],
             'technologies' =>['exists:technologies,id'],
-            'image' => ['url:https','required'],
+            'image' => ['image','required'],
             'date' => ['date','required'],
             'description' => ['required', 'min:10','string'],
         ]);
 
         $data['user_id'] = Auth::id();
+
+
+        $imageSrc= Storage::put('uploads/projects', $data['image']);
+
+        $data['image'] = $imageSrc;
+
+
         $project->update($data);
         $project->technologies()->sync($data['technologies']);
         return redirect()->route('admin.projects.show', $project);

@@ -31,8 +31,12 @@
                         </li>
                     @endforelse
                 </ul>
+                @if (str_starts_with($project->image, 'http'))
+                <img src="{{$project->image}}" alt="">
+                @else
+               <img src="{{asset('storage') . '/' . $project->image}}" alt="">
 
-
+                @endif
                 <p>{{ $project->user->name }}</p>
                 <p>{{$project->type->name}}</p>
                 <p>{{ $project->description }}</p>
